@@ -1,0 +1,308 @@
+{% extends "sitewebapp/base.html" %} {% load static %}{% block content %}
+<div class="row" style="margin: 0px;">
+  <!-- Carousel wrapper -->
+  <div
+    id="carouselExampleCaptions"
+    class="carousel slide carousel-fade"
+    data-ride="carousel"
+    style="
+      margin: 0px auto;
+      margin-top: 20px;
+      padding-top: 13px;
+      max-width: 1100px;
+      box-shadow: 2px 2px 4px #000;
+      border-radius: 0px;
+      background-color: #a30338;
+    "
+  >
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li
+        data-target="#carouselExampleCaptions"
+        data-slide-to="0"
+        class="active"
+      ></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Inner -->
+    <div class="carousel-inner">
+      <!-- Single item -->
+      <div class="carousel-item active">
+        <img
+          src="{% static 'r1.jpg' %}"
+          class="d-block w-100"
+          alt="..."
+        />
+        {% comment %} <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div> {% endcomment %}
+      </div>
+
+      <!-- Single item -->
+      <div class="carousel-item">
+        <img
+          src="{% static 'r2.jpg' %}"
+          class="d-block w-100"
+          alt="..."
+        />
+        {% comment %} <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div> {% endcomment %}
+      </div>
+
+      <!-- Single item -->
+      <div class="carousel-item">
+        <img
+          src="{% static 'r3.jpg' %}"
+          class="d-block w-100"
+          alt="..."
+        />
+        {% comment %} <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </div> {% endcomment %}
+      </div>
+    </div>
+    <!-- Inner -->
+
+    <!-- Controls -->
+    <a
+      class="carousel-control-prev"
+      href="#carouselExampleCaptions"
+      role="button"
+      data-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a
+      class="carousel-control-next"
+      href="#carouselExampleCaptions"
+      role="button"
+      data-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <!-- Carousel wrapper -->
+</div>
+
+<div style="margin: 0;">
+  <div class="row">
+    <div class="card" style="background-color: #a30338; color: #fff;">
+      <div
+        class="card-body"
+        style="margin: 10px auto; max-width: 1100px; text-align: center;"
+        data-toggle="animation"
+        data-animateonscroll="repeat"
+        data-animation="fadeInLeft"
+        class="fa-1x slow"
+      >
+        <h5 class="card-title" >About us</h5>
+
+        <p class="card-text">
+          The Debating Society, NIT Durgapur was founded in 2015 with the vision of promoting a healthy debating culture among the college students and has never looked back since then. From conducting intra college debates to the recently conducted Asian Parliamentary Debate that saw participation from various schools and colleges from across the city, the club has come a long way and has built a reputation for itself. We represent NIT Durgapur in various debating competitions across the country and has carved a niche for itself in the Eastern and Central debating circuits.
+        </p>
+        <a type="button" class="btn btn-light btn-rounded" href="{% url 'about' %}">
+          Know more
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+  <div class="headbox">
+    <h1 class="heading">Our Events</h1>
+  </div>
+  <div style="padding: 7px;">
+    <div style="color: #fff;">
+      <div style="margin: 10px auto; max-width: 1100px; text-align: center; ">
+        <p data-toggle="animation"
+        data-animateonscroll="repeat"
+        data-animation="fadeInRight"
+        class="fa-1x slow">
+        The Debating Society focuses on events that are sure to enrich and instil the passion of debate and discussion in students and allow them to present their ideas on a public forum. We aim to provide a platform for people to voice their opinions and to encourage more people to start meaningful discussions.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {% for i in eventsI %}
+
+    <div class="col-md">
+      <div
+        class="card"
+        style="
+          width: 350px;
+          margin: 20px auto;
+          box-shadow: 3px 3px 4px #000;
+          border-radius: 8px;
+        "
+        data-toggle="animation"
+        data-animateonscroll="repeat"
+        data-animation="fadeInUp"
+        class="fa-1x slow"
+      >
+        {% if i.poster %}
+        <img src="{{ i.poster.url }}" class="card-img-top" alt="..."
+        style="object-fit: cover; height: 300px;" />
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{i.event_name}}</h5>
+          <p>{{ i.event_datetime }}</p>
+          <p>{{i.event_mode}}</p>
+
+          <a
+            href="{% url 'event_view' i.id %}"
+            class="btn btn-outline-white btn-rounded"
+            style="color: #fff;"
+            >Explore</a
+          >
+          {% if i.url1 %}
+          <a
+            href="{{i.url1}}"
+            class="btn btn-outline-white btn-rounded"
+            style="color: #fff;"
+            >{{i.text1}}</a
+          >
+          {% endif %}
+          {% if i.url2 %}
+          <a
+            href="{{i.url1}}"
+            class="btn btn-outline-white btn-rounded"
+            style="color: #fff;"
+            >{{i.text12}/a
+          >
+          {% endif %}
+          {% if i.url3 %}
+          <a
+            href="{{i.url1}}"
+            class="btn btn-outline-white btn-rounded"
+            style="color: #fff;"
+            >{{i.text3}}</a
+          >
+          {% endif %}
+
+
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+<div style="margin: 0;">
+  <div class="row">
+    <div class="card" style="background-color: #a30338; color: #fff;">
+      <div
+        class="card-body"
+        style="margin: 10px auto; max-width: 1100px; text-align: center;"
+        data-toggle="animation"
+        data-animateonscroll="repeat"
+        data-animation="fadeInLeft"
+        class="fa-1x slow"
+      >
+        <h5 class="card-title">Our Blog</h5>
+        <p class="card-text">
+          Blogging connects similar thinkers and communities worldwide while letting your thoughts and ideas come to light.
+          As a home for open and thoughtful expressions, we let unleash your imagination and feelings into a work of art.
+        </p>
+        <a href="{% url 'blog_home' %}" type="button" class="btn btn-light btn-rounded">
+          Explore
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+  <div class="headbox">
+    <h1 class="heading">Our Blog</h1>
+  </div>
+  <div class="row">
+    {% for i in blogsI %}
+
+    <div class="col-md">
+      <div class="card" style="width: 350px; margin: 20px auto;">
+        <img
+          src="{{i.image_url}}" class="card-img-top" alt="..."
+          style="object-fit: cover; height: 200px;"/>
+        <div class="card-body">
+          <p>{{i.title}}</p>
+          <p>{{i.created_on}}</p>
+          <p>{{i.author}}</p>
+          <a
+            href="{% url 'blog_view' i.id %}"
+            class="btn btn-outline-white btn-rounded"
+            style="color: #fff;"
+            >Read More</a
+          >
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div> 
+<div style="padding-top: 1px;">
+  <div class="container">
+    <div class="headbox">
+      <h1 class="heading">Our Team</h1>
+    </div>
+    <div style="padding: 7px;">
+      <div style="color: #fff;">
+        <div style="margin: 10px auto; max-width: 1100px; text-align: center;"
+        data-toggle="animation"
+        data-animateonscroll="repeat"
+        data-animation="fadeInRight"
+        class="fa-1x slow">
+          <p>
+            
+We believe the youth of the hour can bring a change towards positivity and stability only when we are vigilant, receptive and equally responsive in raising our voices and directing our thought processes towards the present issues concerning the society.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for i in membersI %}
+      <div class="col-md">
+        <div class="our-team" style="width: 250px; margin: 20px auto;"
+        data-toggle="animation"
+        data-animateonscroll="repeat"
+        data-animation="zoomIn"
+        class="fa-1x slow">
+          <div class="picture">
+            {% if i.dp %}
+            <img class="img-fluid" src="{{ i.dp.url }}" />
+            {% else %}
+            <img class="img-fluid" src="{% static 'assets/img/dogs/debsoc.png' %}" />
+            {% endif %}
+          </div>
+          <div class="team-content">
+            <h3 class="name">{{i.firstname}}</h3>
+            <h4 class="title">{{i.post}}</h4>
+          </div>
+          <ul class="social">
+            <li>
+              <a href="{{i.facebook_url}}" class="fa fa-facebook" aria-hidden="true"></a>
+            </li>
+            <li>
+              <a href="{{i.instagram_url}}" class="fa fa-instagram" aria-hidden="true"></a>
+            </li>
+            <li>
+              <a href="{{i.linkedin_url}}"" class="fa fa-linkedin" aria-hidden="true"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{%endblock%}

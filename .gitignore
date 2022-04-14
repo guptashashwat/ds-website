@@ -1,0 +1,12 @@
+env
+.env
+
+bin
+lib
+bin/
+lib/
+
+pyvenv.cfg 
+db.sqlite3
+.env.save 
+.VSCodeCounter
